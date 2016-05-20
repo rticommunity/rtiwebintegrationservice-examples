@@ -3,6 +3,8 @@ This example illustrates how to subscribe to Shape topics using _RTI Web
 Integration Service_. The samples read are drawn on a Canvas using Fabric—a
 simple JavaScript framework.
 
+![Alt text](img/rti_web_shapes_demo_screenshot.png "Web Shapes Demo Screenshot")
+
 ## Running the Example
 To run the example, open a terminal and enter the following command:
 
@@ -31,4 +33,3 @@ Demo_ and start publishing shapes. Open a browser and navigate
 to ```http://<hostname>:8080```. You will find there all the shapes that
 are being published.
 
-![Alt text](img/rti_web_shapes_demo_screenshot.png "Web Shapes Demo Screenshot")
