@@ -1,0 +1,35 @@
+<!-- RTI Data Distribution Service Deployment -->
+<dds xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://community.rti.com/schema/latest/rti_web_integration_service.xsd">
+    <!--
+        This configuration contains a complete scenario for interacting with RTI
+        Shapes Demo. That is, it creates all the necessary Topics, DataWriters,
+        and DataReaders to publish and subscribe to Squares, Circles, and
+        Triangles. The data types and domains in "MyParticipant" refer to the
+        ones defined under resource/xml/RTI_WEB_INTEGRATION_SERVICE.xml.
+        Note that this file is automatically loaded by Web Integration Service
+        at startup time.
+    -->
+    <web_integration_service name="SimpleShapesDemo">
+        <application name="SimpleShapesDemoApplication">
+            <domain_participant name="MyParticipant"
+                domain_ref="ShapesDomainLibrary::ShapesDomain">
+                <register_type name="ShapeType" kind="dynamicData"
+                    type_ref="ShapeType" />
+                <topic name="Square" register_type_ref="ShapeType" />
+                <topic name="Circle" register_type_ref="ShapeType" />
+                <topic name="Triangle" register_type_ref="ShapeType" />
+                <publisher name="MyPublisher">
+                    <data_writer name="MySquareWriter" topic_ref="Square" />
+                    <data_writer name="MyCircleWriter" topic_ref="Circle" />
+                    <data_writer name="MyTriangleWriter" topic_ref="Triangle" />
+                </publisher>
+                <subscriber name="MySubscriber">
+                    <data_reader name="MySquareRdr" topic_ref="Square" />
+                    <data_reader name="MyCircleRdr" topic_ref="Circle" />
+                    <data_reader name="MyTriangleRdr" topic_ref="Triangle" />
+                </subscriber>
+            </domain_participant>
+        </application>
+    </web_integration_service>
+</dds>

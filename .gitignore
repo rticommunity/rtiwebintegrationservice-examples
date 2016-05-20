@@ -26,3 +26,11 @@
 *.exe
 *.out
 *.app
+
+# Other files
+*~
+.directory
+.Trash-*
+*.new.*
+.DS_Store
+
