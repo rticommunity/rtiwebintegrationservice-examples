@@ -110,11 +110,12 @@ rti.shapesdemo = {
             // unregistered and we remove the shape from the canvas.
             if (!validData) {
                 if (instanceState != "ALIVE") {
-                    canvas.getObjects().every(
+                    rti.shapesdemo.canvas.getObjects().every(
                         function (element, j, array) {
-                            if (element.uid == instanceHandle) {
+                            if (element.uid.instanceHandle == instanceHandle
+                                && element.uid.topic == shapeKind) {
                                 element.remove();
-                                canvas.renderAll();
+                                rti.shapesdemo.canvas.renderAll();
                                 return false;
                             }
                             return true;
@@ -223,4 +224,3 @@ rti.shapesdemo.shapeColors = {
     MAGENTA: "#ff00ff",
     ORANGE: "#ff8200"
 };
-
