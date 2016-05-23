@@ -7,7 +7,7 @@ applications and services with _RTI Connext™ DDS_.
 Traditionally, web-based applications and services have relied on non-standard
 interfaces to participate as first-class citizens in the DDS Global Data Space.
 _Web Integration Service_ leverages the
-[Web-Enabled DDS OMG standard](http://www.omg.org/spec/DDS-WEB) to provide
+[Web-Enabled DDS OMG standard (DDS-WEB)](http://www.omg.org/spec/DDS-WEB) to provide
 a simple generic standards-based interface that provides a transparent bridge
 between web-based services and unmodified DDS applications.
 
@@ -25,7 +25,7 @@ solution.
 join a domain, discover remote entities, and ensure that subscribers receive
 the information they sent.
 * It enables interoperability between applications written in different
-programming languages and operating systems.
+programming languages and operating systems for which there is no available Connext DDS SDK.
 * It provides access control mechanisms to ensure that only authorized
 applications can access the DDS Global Data Space.
 
