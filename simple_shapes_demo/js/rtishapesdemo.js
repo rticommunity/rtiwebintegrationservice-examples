@@ -54,13 +54,16 @@ rti.shapesdemo = {
         var shapesDemoIntervalPeriod = 33; // in milliseconds
 
         // Call drawShape() for Squares, Circles, and Triangles every
-        // shapesDemoIntervalPeriod
+        // shapesDemoIntervalPeriod, and passing the data resulting
+        // for reading new samples of the appropriate topic in json format
+        // without deleting the samples from the Reader's cache.
         setInterval(function(){
             // Read Squares
             $.getJSON(
                 squareReaderUrl,
                 {
-                    sampleFormat: "json"
+                    sampleFormat: "json",
+                    removeFromReaderCache: "false"
                 },
                 function(data) {
                     rti.shapesdemo.drawShape(data, "Square");
@@ -71,7 +74,8 @@ rti.shapesdemo = {
             $.getJSON(
                 triangleReaderUrl,
                 {
-                    sampleFormat: "json"
+                    sampleFormat: "json",
+                    removeFromReaderCache: "false"
                 },
                 function(data) {
                     rti.shapesdemo.drawShape(data, "Triangle");
@@ -82,7 +86,8 @@ rti.shapesdemo = {
             $.getJSON(
                 circleReaderUrl,
                 {
-                    sampleFormat: "json"
+                    sampleFormat: "json",
+                    removeFromReaderCache: "false"
                 },
                 function(data) {
                     rti.shapesdemo.drawShape(data, "Circle");
