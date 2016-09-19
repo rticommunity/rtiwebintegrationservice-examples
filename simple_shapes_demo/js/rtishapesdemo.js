@@ -20,8 +20,9 @@ rti.shapesdemo = {
      * needs to be called before reading or drawing shapes.
      */
     setupScenario: function() {
-        rti.shapesdemo.canvas = this.__canvas = new fabric.Canvas(
-            'shapesDemoCanvas', {
+        rti.shapesdemo.canvas = new fabric.Canvas(
+            'shapesDemoCanvas',
+            {
                 hoverCursor: 'pointer',
                 perPixelTargetFind: true,
                 targetFindTolerance: 5,
@@ -142,14 +143,19 @@ rti.shapesdemo = {
             }
 
             var shapeSize = sample.data.shapesize;
-        	var x = sample.data.x - shapeSize/2;
-        	var y = sample.data.y - shapeSize/2;
+            var x = sample.data.x - shapeSize/2;
+            var y = sample.data.y - shapeSize/2;
 
             // Look for the shape received in the canvas
-            var shape = rti.shapesdemo.canvas.getObjects().find(function(element) {
-                return (element.uid.instanceHandle == instanceHandle
-                    && element.uid.topic == shapeKind);
-            });
+            var shape = undefined;
+            for (var i = 0; i < rti.shapesdemo.canvas.getObjects().length; i++){
+                var currentElement = rti.shapesdemo.canvas.getObjects()[i];
+                if (currentElement.uid.instanceHandle == instanceHandle
+                        && currentElement.uid.topic == shapeKind) {
+                    shape = currentElement;
+                    break;
+                }
+            }
 
             // If it is not there, we need to create a new shape in the
             // received position. Otherwise, update the existing shape's
