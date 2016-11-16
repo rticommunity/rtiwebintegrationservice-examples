@@ -10,8 +10,8 @@ To run the example, open a terminal and enter the following command:
 
 ```
 <NDDSHOME>/bin/rtiwebintegrationservice \
-  -cfgFile /path/to/simple_shapes_demo/simple_shapes_demo_config.xml
-  -cfgName SimpleShapesDemo
+  -cfgFile /path/to/simple_shapes_demo/simple_shapes_demo_config.xml \
+  -cfgName SimpleShapesDemo \
   -documentRoot /path/to/simple_shapes_demo
 ```
 
