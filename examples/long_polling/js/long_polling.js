@@ -75,8 +75,14 @@ function readOrTake(datareaderUrl, onDataAvailableFnc, take)
             console.log(errorThrown);
         },
         complete: function(xhr) {
-            // At this point we have either read, failed, or there was a
-            // time out. Either way, readOrTake again.
+            /*
+             * If Web Integration Service stops or the connection is dropped,
+             * the client appplication will spin because $.ajax will complete
+             * the request right away without waiting for "timeout" ms.
+             * We recommend checking for this kind of errors and introducing a
+             * re-try mechanism to avoidspinning while the client reconnects
+             * to the server.
+             */
             readOrTake(datareaderUrl, onDataAvailableFnc)
         },
         dataType: "json",
