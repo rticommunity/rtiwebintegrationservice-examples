@@ -11,7 +11,6 @@
 # use or inability to use the software.
 
 import requests
-import time
 
 
 def on_data_available(data):
