@@ -9,16 +9,25 @@
  * use or inability to use the software.
  */
 
+ /**
+  * Iterates over the list of samples that are available on the DataReader's
+  * cache and adds them -- replacing the current content -- to the
+  * "samplesTable" table in the HTML document.
+  * @param sampleSeq Sequence of samples that have been received and must be
+  * written in the table.
+  */
 function onDataAvailable(sampleSeq)
 {
     var tableRows = '';
 
     sampleSeq.forEach(function(sample, i, samples) {
+        // Return if invalid data
         var validData = sample.read_sample_info.valid_data;
         if (!validData) {
             return;
         }
 
+        // Construct new row with the value of color, x, y, and shapesize
         tableRows += "<tr><td>";
         tableRows += sample.data.color;
         tableRows += "</td><td>"
@@ -30,9 +39,24 @@ function onDataAvailable(sampleSeq)
         tableRows += "</td></tr>"
     });
 
+    // Replace the previous state of samplesTable with the new set of
+    // read rows.
     document.getElementById("samplesTable").innerHTML = tableRows;
 }
 
+/**
+ * This function performs a read or a take operation on a remote DataReader
+ * given the URL that identifies it. Upon success, if new data becoms available,
+ * the function calls onDataAvailableFnc that is given as a parameter.
+ * The function performs Long Polling read operation using a maxWait timeout
+ * of 30 seconds, which is the time Web Integration Service's internal waitset
+ * will block until there are samples with sampleStateMask = "NOT_READ."
+ * @param datareaderUrl URL identifying the remote DataReader.
+ * @param onDataAvailableFnc Function that will handle data if it becomes
+ * available.
+ * @param take Boolean parameter indicating whether data that is read should
+ * be removed from the remote DataReader's cache.
+ */
 function readOrTake(datareaderUrl, onDataAvailableFnc, take)
 {
     // Timeout in seconds
@@ -51,10 +75,9 @@ function readOrTake(datareaderUrl, onDataAvailableFnc, take)
             console.log(errorThrown);
         },
         complete: function(xhr) {
-            if (xhr.status == 200) {
-                // Only call again if the request was OK
-                readOrTake(datareaderUrl, onDataAvailableFnc)
-            }
+            // At this point we have either read, failed, or there was a
+            // time out. Either way, readOrTake again.
+            readOrTake(datareaderUrl, onDataAvailableFnc)
         },
         dataType: "json",
         data: {
@@ -66,11 +89,27 @@ function readOrTake(datareaderUrl, onDataAvailableFnc, take)
         timeout: (maxWait * 1000 * 2)})
 }
 
+/**
+ * This function performs a read operation that calls onDataAvailableFnc
+ * when new samples become available. The read operation does not remove
+ * samples from the DataReader's cache.
+ * @param datareaderUrl URL identifying the remote DataReader.
+ * @param onDataAvailableFnc Function that will handle data if it becomes
+ * available.
+ */
 function read(datareaderUrl, onDataAvailableFnc)
 {
     readOrTake(datareaderUrl, onDataAvailableFnc, false)
 }
 
+/**
+ * This function performs a take operation that calls onDataAvailableFnc
+ * when new samples become available. The take operation removes samples from
+ * the DataReader's cache.
+ * @param datareaderUrl URL identifying the remote DataReader.
+ * @param onDataAvailableFnc Function that will handle data if it becomes
+ * available.
+ */
 function take(datareaderUrl, onDataAvailableFnc)
 {
     readOrTake(datareaderUrl, onDataAvailableFnc, true)
