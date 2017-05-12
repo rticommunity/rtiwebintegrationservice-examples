@@ -1,3 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# (c) 2017 Copyright, Real-Time Innovations, Inc.  All rights reserved.
+# RTI grants Licensee a license to use, modify, compile, and create derivative
+# works of the Software.  Licensee has the right to distribute object form
+# only for use with RTI products.  The Software is provided "as is", with no
+# warranty of any type, including any warranty for fitness for any purpose.
+# RTI is under no obligation to maintain or support the Software.  RTI shall
+# not be liable for any incidental or consequential damages arising out of the
+# use or inability to use the software.
+
 import requests
 import time
 
@@ -20,38 +32,33 @@ def read_or_take(data_reader_url, on_data_available_fnc, take):
     max_wait = 30
 
     # Do HTTP request, which calls read_or_take again upon completion
-    try:
-        # We reuse the session to avoid closing the underlying TCP connection.
-        # Remeber to execute Web Integration Service with
-        # -enableKeepAlive yes and and a appropriate -keepAliveTimeout time.
-        req_session = requests.Session()
+    # We reuse the session to avoid closing the underlying TCP connection.
+    # Remeber to execute Web Integration Service with
+    # -enableKeepAlive yes and and a appropriate -keepAliveTimeout time.
+    req_session = requests.Session()
 
-        while True:
-            # We call GET and use JSON format, take or read depending on the
-            # take parameter, and a maxWait timeout of 30 seconds, which is the
-            # time Web Integration Service's internal waitset will block until
-            # there are samples with sampleStateMask = "NOT_READ."
-            # Note that this configuration will work well for only one client
-            # at a time, because as any other client calls read the sample
-            # status will change. Therefore, with this configuration, different
-            # clients need to use different DataReaders.
-            response = req_session.get(
-                data_reader_url,
-                params={
-                    "sampleFormat": "json",
-                    "removeFromReaderCache": "true" if take else "false",
-                    "maxWait": str(max_wait),
-                    "sampleStateMask": "NOT_READ"
-                },
-                timeout=(max_wait * 2))
-            if (response.status_code == 200) and (response.text != "[]"):
-                # Only call on_data_available if the status code was 200, and
-                # we did not get an empty sequence of samples.
-                on_data_available(response.text)
-
-    except Exception as e:
-        print(e)
-        pass
+    while True:
+        # We call GET and use JSON format, take or read depending on the
+        # take parameter, and a maxWait timeout of 30 seconds, which is the
+        # time Web Integration Service's internal waitset will block until
+        # there are samples with sampleStateMask = "NOT_READ."
+        # Note that this configuration will work well for only one client
+        # at a time, because as any other client calls read the sample
+        # status will change. Therefore, with this configuration, different
+        # clients need to use different DataReaders.
+        response = req_session.get(
+            data_reader_url,
+            params={
+                "sampleFormat": "json",
+                "removeFromReaderCache": "true" if take else "false",
+                "maxWait": str(max_wait),
+                "sampleStateMask": "NOT_READ"
+            },
+            timeout=(max_wait * 2))
+        if (response.status_code == 200) and (response.text != "[]"):
+            # Only call on_data_available if the status code was 200, and
+            # we did not get an empty sequence of samples.
+            on_data_available(response.text)
 
 
 def read(data_reader_url, on_data_available_fnc):
@@ -87,10 +94,20 @@ def main():
         + "/subscribers/MySubscriber" \
         + "/data_readers/MySquareRdr"
 
+    print("Starting example...")
+
     # The take function will block, if you want to continue your execution
     # then take and subsequent calls to on_data_available need to be run on
     # a separate thread.
-    take(datareader_url, on_data_available)
+    try:
+        take(datareader_url, on_data_available)
+    except (KeyboardInterrupt, SystemExit):
+        pass
+    except Exception as e:
+        print(e)
+        pass
+
+    print("Stopping example...")
 
 
 if __name__ == "__main__":
