@@ -37,6 +37,7 @@ function readOrTake(datareaderUrl, onDataAvailableFnc, take)
 {
     // Timeout in seconds
     var maxWait = 30;
+
     // Do HTTP request, which calls read_or_take again upon completion
     $.ajax({
         url: datareaderUrl,

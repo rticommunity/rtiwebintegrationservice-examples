@@ -33,7 +33,7 @@ def read_or_take(data_reader_url, on_data_available_fnc, take):
     # Do HTTP request, which calls read_or_take again upon completion
     # We reuse the session to avoid closing the underlying TCP connection.
     # Remeber to execute Web Integration Service with
-    # -enableKeepAlive yes and and a appropriate -keepAliveTimeout time.
+    # -enableKeepAlive yes and an appropriate -keepAliveTimeout time.
     req_session = requests.Session()
 
     while True:
