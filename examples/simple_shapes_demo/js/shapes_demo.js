@@ -26,7 +26,7 @@ rti.shapesdemo = {
                 hoverCursor: 'pointer',
                 perPixelTargetFind: true,
                 targetFindTolerance: 5,
-                backgroundImage: '../img/rti_background.png'
+                backgroundImage: '../../../../resources/img/rti_background.png'
             }
         );
     },

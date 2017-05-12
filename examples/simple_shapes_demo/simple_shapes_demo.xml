@@ -24,7 +24,7 @@
                     <kind>RELIABLE_RELIABILITY_QOS</kind>
                 </reliability>
                 <history>
-                    <depth>1</depth>
+                    <depth>10</depth>
                     <kind>KEEP_LAST_HISTORY_QOS</kind>
                 </history>
             </datareader_qos>
