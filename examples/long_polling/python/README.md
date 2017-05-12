@@ -18,7 +18,7 @@ into _Web Integration Service_.
 this case ```LongPolling```—which starts the ```LongPollingApplication```.
 This application instantiates a _DomainParticipant_ with _DataReaders_ to read
 to Square topics (i.e., Squares, Circles, and Triangles).
-* The ```-enablekeepAlive`` option tries to maintain open the underlying TCP
+* The ```-enablekeepAlive``` option tries to maintain open the underlying TCP
 connection between client and server between subsequent requests and responses.
 
 ### Running Python Long Polling Example

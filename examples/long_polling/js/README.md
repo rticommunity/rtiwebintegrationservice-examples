@@ -5,7 +5,7 @@ To run the example, open a terminal and enter the following command:
 
 ```
 <NDDSHOME>/bin/rtiwebintegrationservice \
-  -cfgFile /path/to/rtiwebintegrationservice/examples/long_polling/long_polling.xml \
+  -cfgFile /path/to/rtiwebintegrationservice-examples/examples/long_polling/long_polling.xml \
   -cfgName LongPolling \
   -documentRoot /path/to/rtiwebintegrationservice-examples \
   -enableKeepAlive yes
@@ -23,7 +23,7 @@ to Square topics (i.e., Squares, Circles, and Triangles).
 * The ```-documentRoot``` argument specifies the folder that _Web
 Integration Services_ web server will provide when accessing the default URL.
 That is ```http://<hostname>:8080```.
-* The ```-enablekeepAlive`` option tries to maintain open the underlying TCP
+* The ```-enablekeepAlive``` option tries to maintain open the underlying TCP
 connection between client and server between subsequent requests and responses.
 
 ### Running JavaScript Long Polling Example

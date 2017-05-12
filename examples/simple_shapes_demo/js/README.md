@@ -28,7 +28,7 @@ to all shape topics (i.e., Squares, Circles, and Triangles).
 * The ```-documentRoot``` argument specifies the folder that _Web
 Integration Services_ web server will provide when accessing the default URL.
 That is ```http://<hostname>:8080```.
-* The ```-enablekeepAlive`` option tries to maintain open the underlying TCP
+* The ```-enablekeepAlive``` option tries to maintain open the underlying TCP
 connection between client and server between subsequent requests and responses.
 
 Once you have started _Web Integration Service_, you can open _RTI Shapes

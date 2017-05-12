@@ -13,8 +13,8 @@ leverage a set of *WaitSets* that the server makes available to wait until
 certain read conditions are met.
 
 
-Instructions on how to run _Web Integration Service_ and client applications
-for each specific example are available under:
+Instructions on how to run _Web Integration Service_ and the client applications
+for each specific language are available under:
 
-* javascript/README.md
-* python/README.md
+* [js/README.md](js/README.md)
+* [python/README.md](python/README.md)
