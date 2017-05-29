@@ -40,14 +40,14 @@
         Note that this file is automatically loaded by Web Integration Service
         at startup time.
     -->
-    <web_integration_service name="LongPolling">
-      <application name="LongPollingApplication">
+    <web_integration_service name="longPolling">
+        <application name="ShapesDemoApp">
             <domain_participant name="MyParticipant"
                 domain_ref="ShapesDomainLibrary::ShapesDomain">
                 <register_type name="ShapeType" type_ref="ShapeType" />
                 <topic name="Square" register_type_ref="ShapeType" />
                 <subscriber name="MySubscriber">
-                    <data_reader name="MySquareRdr" topic_ref="Square" />
+                    <data_reader name="MySquareReader" topic_ref="Square" />
                 </subscriber>
             </domain_participant>
         </application>

@@ -13,14 +13,6 @@
 import requests
 
 
-def on_data_available(data):
-    """ Handles data received by the read or take functions whenever data is
-    available. In this case, the function prints out the data it receives,
-    which is string represented in JSON format.
-    """
-    print(data)
-
-
 def read_or_take(data_reader_url, on_data_available_fnc, take):
     """ Performs a read or take operation on a DDS DataReader using
     long-polling. If new data becomes available, the function automatically
@@ -57,7 +49,7 @@ def read_or_take(data_reader_url, on_data_available_fnc, take):
         if (response.status_code == 200) and (response.text != "[]"):
             # Only call on_data_available if the status code was 200, and
             # we did not get an empty sequence of samples.
-            on_data_available(response.text)
+            on_data_available_fnc(response.text)
 
 
 def read(data_reader_url, on_data_available_fnc):
@@ -78,36 +70,3 @@ def take(data_reader_url, on_data_available_fnc):
     in the DataReaders cache.
     """
     read_or_take(data_reader_url, on_data_available_fnc, True)
-
-
-def main():
-    # Assume that we are running on localhost
-    host = "localhost"
-    port = 8080
-
-    # Prepare request
-    datareader_url = "http://" + host + ":" + str(port) \
-        + "/dds/rest1" \
-        + "/applications/LongPollingApplication" \
-        + "/domain_participants/MyParticipant" \
-        + "/subscribers/MySubscriber" \
-        + "/data_readers/MySquareRdr"
-
-    print("Starting example...")
-
-    # The take function will block, if you want to continue your execution
-    # then take and subsequent calls to on_data_available need to be run on
-    # a separate thread.
-    try:
-        take(datareader_url, on_data_available)
-    except (KeyboardInterrupt, SystemExit):
-        pass
-    except Exception as e:
-        print(e)
-        pass
-
-    print("Stopping example...")
-
-
-if __name__ == "__main__":
-    main()

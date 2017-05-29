@@ -33,4 +33,5 @@
 .Trash-*
 *.new.*
 .DS_Store
-
+*.pyc
+index.html

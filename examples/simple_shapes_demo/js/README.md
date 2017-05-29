@@ -13,11 +13,11 @@ the JavaScript client as follows.
 To run the example, open a terminal and enter the following command:
 
 ```
-<NDDSHOME>/bin/rtiwebintegrationservice \
-  -cfgFile /path/to/rtiwebintegrationservice-examples/examples/simple_shapes_demo/simple_shapes_demo.xml \
-  -cfgName SimpleShapesDemo \
-  -documentRoot /path/to/rtiwebintegrationservice-examples \
-  -enableKeepAlive yes
+$NDDSHOME/bin/rtiwebintegrationservice \
+  -cfgFile /path/to/examples/parent/examples/simple_shapes_demo/simple_shapes_demo.xml \
+  -cfgName simpleShapesDemo \
+  -enableKeepAlive yes \
+  -documentRoot /path/to/examples/parent
 ```
 
 Where:
@@ -25,8 +25,7 @@ Where:
 * The ``-cfgFile`` argument loads the appropriate configuration file
 into _Web Integration Service_.
 * The ``-cfgName`` argument specifies the configuration to be instantiated—in
-this case ```SimpleShapesDemo```—which starts
-the ``SimpleShapesDemoApplication``.
+this case ```SimpleShapesDemo```—which starts the ``SimpleShapesDemoApp``.
 This application instantiates a _DomainParticipant_ with _DataReaders_ to read
 to all shape topics (i.e., Squares, Circles, and Triangles).
 * The ``-documentRoot`` argument specifies the folder that _Web

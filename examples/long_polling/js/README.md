@@ -8,11 +8,11 @@ To run _Web Integration Service_, open a terminal and enter the following
 command:
 
 ```
-<NDDSHOME>/bin/rtiwebintegrationservice \
-  -cfgFile /path/to/rtiwebintegrationservice-examples/examples/long_polling/long_polling.xml \
-  -cfgName LongPolling \
-  -documentRoot /path/to/rtiwebintegrationservice-examples \
-  -enableKeepAlive yes
+$NDDSHOME/bin/rtiwebintegrationservice \
+  -cfgFile /path/to/examples/parent/examples/long_polling/long_polling.xml \
+  -cfgName longPolling \
+  -enableKeepAlive yes \
+  -documentRoot /path/to/examples/parent
 ```
 
 Where:
@@ -20,8 +20,7 @@ Where:
 * The ``-cfgFile`` argument loads the appropriate configuration file
 into _Web Integration Service_.
 * The ``-cfgName`` argument specifies the configuration to be instantiated—in
-this case ``LongPolling``—which starts
-the ``LongPollingApplication``.
+this case ``longPolling``—which starts the ``ShapesDemoApp``.
 This application instantiates a _DomainParticipant_ with _DataReaders_ to read
 to Square topics.
 * The ``-documentRoot`` argument specifies the folder that _Web
@@ -30,7 +29,12 @@ Integration Service's_ web server will provide when accessing the default URL
 under ``http://<hostname>:8080/examples/long_polling/js``.
 * The ``-enablekeepAlive`` argument configures the service to keep open the
 underlying TCP connection between client and server between subsequent requests
-and responses when possible.
+and responses when possible. You can ensure that the connection survives the
+subsequent long-lasting requests by increasing the default value of
+``-keepAliveTimeout`` to value greater than the timeout specified in
+``long_polling.js``. Note that the ``-keepAliveTimeout`` argument expects a
+value in milliseconds.
+
 
 ### Running RTI Shapes Demo
 Once you have started _Web Integration Service_, open _RTI Shapes

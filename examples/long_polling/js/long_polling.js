@@ -9,41 +9,6 @@
  * use or inability to use the software.
  */
 
- /**
-  * Iterates over the list of samples that are available on the DataReader's
-  * cache and adds them -- replacing the current content -- to the
-  * "samplesTable" table in the HTML document.
-  * @param sampleSeq Sequence of samples that have been received and must be
-  * written in the table.
-  */
-function onDataAvailable(sampleSeq)
-{
-    var tableRows = '';
-
-    sampleSeq.forEach(function(sample, i, samples) {
-        // Return if invalid data
-        var validData = sample.read_sample_info.valid_data;
-        if (!validData) {
-            return;
-        }
-
-        // Construct new row with the value of color, x, y, and shapesize
-        tableRows += "<tr><td>";
-        tableRows += sample.data.color;
-        tableRows += "</td><td>"
-        tableRows += sample.data.x;
-        tableRows += "</td><td>"
-        tableRows += sample.data.y;
-        tableRows += "</td><td>";
-        tableRows += sample.data.shapesize;
-        tableRows += "</td></tr>"
-    });
-
-    // Replace the previous state of samplesTable with the new set of
-    // read rows.
-    document.getElementById("samplesTable").innerHTML = tableRows;
-}
-
 /**
  * This function performs a read or a take operation on a remote DataReader
  * given the URL that identifies it. Upon success, if new data becoms available,
