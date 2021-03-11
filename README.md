@@ -15,7 +15,7 @@ Simply set up _Web Integration Service_ to create DDS entities associated with
 web-based client applications. No changes are required in the _Connext DDS_
 applications.
 
-![Web Integration Service Overview](https://community.rti.com/static/documentation/connext-dds/current/doc/manuals/web_integration_service/img/WebDDSOverview.png)
+![Web Integration Service Overview](https://community.rti.com/static/documentation/connext-dds/6.0.1/doc/manuals/web_integration_service/_images/WebDDSOverview.png)
 
 The key benefits of Web Integration Service are:
 * It reduces the time and effort spent integrating web-based protocols with
